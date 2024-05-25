@@ -114,7 +114,7 @@ a = laplace(f)  % output: 1/(s - 3) + 2/s^3
 b = ilaplace(a) % output: exp(3*t) + t^2
 
 
-nom = [1];
+num = [1];
 den = [1 3 2 0];  % s^3 + 3s^2 + 2s --the missed term is represented with 0
-j = tf(nom,den);  % getting transfer function
+j = tf(num,den);  % getting transfer function
 rlocus(j)         % plotting the root locus
