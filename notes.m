@@ -43,9 +43,9 @@ c = conv(x, y)  % multiplication
 
 
 % getting transfer function
-nom = [1 2 3];
+num = [1 2 3];
 den = [3 4 5 5];
-tf(nom, den)     % inputs: nomerator and denomenator polynomials
+tf(num, den)     % inputs: numerator and denomenator polynomials
 %       s^2 + 2 s + 3
 %  -----------------------
 %   3 s^3 + 4 s^2 + 5 s + 5
@@ -68,6 +68,21 @@ sys = zpk(z, p, k)    % takes the zeros, poles, and constants' matrices and give
 %     20 (s+2) (s+4)
 %  ---------------------
 %  (s+3) (s^2 + 4s + 29)
+
+
+% state space to transfer function
+A = [0 1; -2 -3];
+B = [0; 1];
+C = [1 0];
+D = 0;
+[num, den] = ss2tf(A, B, C, D);
+tf(num, den)
+
+
+% transfer function to state space
+num = [2 5];
+den = [1 3 2];
+[A, B, C, D] = tf2ss(num, den);
 
 
 % syms, expand, factor
@@ -95,7 +110,7 @@ limit(f, x, 0)     % output: 10
 syms t;
 j = t^2+exp(3*t);
 f = sym(j);
-a = laplace(f) % output: 1/(s - 3) + 2/s^3
+a = laplace(f)  % output: 1/(s - 3) + 2/s^3
 b = ilaplace(a) % output: exp(3*t) + t^2
 
 
